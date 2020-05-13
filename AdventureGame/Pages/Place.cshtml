@@ -1,0 +1,32 @@
+﻿@page
+@model AdventureGame.PlaceModel
+@{
+    ViewData["Title"] = "Place";
+}
+
+<h1>@Model.Location.Title</h1>
+<div>@Model.Location.Description</div>
+<div class="m-1">
+    @foreach (var target in Model.Targets)
+    {
+        if (target.To == Models.Room.GameRoom)
+        {
+            <a class="btn btn-secondary" asp-page="RPS">@target.Description</a>
+        }
+        else
+        {
+            <a class="btn btn-secondary" asp-page="Place" asp-route-id="@target.To">@target.Description</a>
+        }
+    }
+    <div style="height:200px"></div>
+    <a>@Model.State.HP</a>
+    <a>@Model.State.Level</a>
+    @if (Model.State.Equipment != null)
+    {
+        @foreach (var x in Model.State.Equipment)
+        {
+            <a>@x</a>
+        }
+    }
+    <a>@Model.State.Money</a>
+</div>

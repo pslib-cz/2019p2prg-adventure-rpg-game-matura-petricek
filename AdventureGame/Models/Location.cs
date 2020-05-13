@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Models
 {
-    public class Room
+    public class Location : ILocation
     {
+        public string Title { get; set; }
         public string Description { get; set; }
-        public string RoomName { get; set; }
     }
 }
