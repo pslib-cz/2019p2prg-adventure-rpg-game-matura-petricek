@@ -46,6 +46,10 @@ namespace AdventureGame.Services
             {
                 State.Location = Room.GameOver;
             }
+            if (State.Level == 10)
+            {
+                State.Location = Room.WinRoom;   
+            }
             else
             {
                 switch (room)
@@ -55,7 +59,16 @@ namespace AdventureGame.Services
                         State.Level += 0.5;
                         break;
                     case Room.Home:
-                        State.HP = 10;
+                        if(State.HP < 10)
+                        {
+                            State.HP += 2;
+                        }
+                        break;
+                    case Room.Bank:
+                        if(State.Money < 0)
+                        {
+                            State.Money = 5;
+                        }
                         break;
                     case Room.GameRoom:
 
@@ -84,9 +97,14 @@ namespace AdventureGame.Services
                         State.Money -= 20;
                         break;
                 }
+                if(State.Money < -5)
+                {
+                    State.Money = -5;
+                }
+                Store();
             }
-            Store();
-            
+
+
         }
     }
 }

@@ -21,10 +21,12 @@ namespace AdventureGame
         public Location Location { get; set; }
         public List<Connection> Targets { get; set; }
         public GameState State { get; set; }
+        public string Win { get; set; }
         public void OnGet(Room id)
         {
             _gs.FetchData();
             //
+            _gs.RoomAction(id);
             _gs.State.Location = id;
             _gs.Store();
             Location = _gs.Location;

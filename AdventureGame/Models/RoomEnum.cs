@@ -15,6 +15,8 @@ namespace AdventureGame.Models
         Home,
         Cave,
         Shop,
-        GameRoom
+        WinRoom,
+        GameRoom,
+        Bank
     }
 }

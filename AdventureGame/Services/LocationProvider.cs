@@ -20,16 +20,21 @@ namespace AdventureGame.Services
             _locations.Add(Room.GameRoom, new Location { Title = "Game Room", Description = "Welcome to the casino." });
             _locations.Add(Room.Start, new Location { Title = "Start", Description = "This is where our story starts." }); // Game starts
             _locations.Add(Room.GameOver, new Location { Title = "Game Over", Description = "All worldly things will one day perish. You just did." }); // Game Over
-            _locations.Add(Room.Hall, new Location { Title = "Hall", Description = "You stand in seemingly empty hall ..." });
+            _locations.Add(Room.Hall, new Location { Title = "Hall", Description = "You stand in seemingly empty hall...This is where you start your journey." });
             _locations.Add(Room.Library, new Location { Title = "Library", Description = "Library is in utterly desolate state ..." });
+            _locations.Add(Room.Bank, new Location { Title = "Bank", Description = "A bank with no interest rate? Seems shady..." });
             _locations.Add(Room.Cave, new Location { Title = "Cave", Description = "A lot of sounds are coming from this strange cave.\nYou should be carefull." });
             _map.Add(new Connection(Room.Start, Room.Hall, "Go to hall"));
-            _map.Add(new Connection(Room.Hall, Room.Library, "Visit Library", (gs) => { if (gs.HP > 10) return true; return false; }));
+            _map.Add(new Connection(Room.Hall, Room.Bank, "Go to bank"));
+            _map.Add(new Connection(Room.Bank, Room.Hall, "Go back to the Hall"));
+            _map.Add(new Connection(Room.Hall, Room.Library, "Visit Library"));
             _map.Add(new Connection(Room.Library, Room.Hall, "Return to hall"));
             _map.Add(new Connection(Room.Library, Room.GameOver, "Get eaten by Cthulhu"));
             _map.Add(new Connection(Room.Start, Room.Cave ,"Go to the dangerous cave"));
             _map.Add(new Connection(Room.Start, Room.Home, "Go home"));
-            _map.Add(new Connection(Room.Home, Room.GameRoom, "Go to the game room"));
+            _map.Add(new Connection(Room.Hall, Room.Home, "Go home"));
+            _map.Add(new Connection(Room.Home, Room.GameRoom, "Go Gambling"));
+            _map.Add(new Connection(Room.Home, Room.Hall, "Go to the hall"));
         }
 
         public bool ExistsLocation(Room id)

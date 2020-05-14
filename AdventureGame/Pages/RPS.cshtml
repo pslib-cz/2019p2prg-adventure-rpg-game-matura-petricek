@@ -33,6 +33,23 @@
             Scissors
         </label>
     </div>
-    <button type="submit" class="btn btn-primary">Play</button>
-</form>
+    <p>@Model.Message</p>
+    <p>@Model.State.Money</p>
+    @if (Model.Finished == true)
+    {
+        <a class="btn btn-secondary" asp-page="Place" asp-route-id="Home">Go home</a>
+    }
+    else
+    {
+        @if (Model.State.Money < 2)
+        {
+            <p>You don't have enough money to play</p>
+            <a class="btn btn-secondary" asp-page="Place" asp-route-id="Home">Go home</a>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Play</button>
+        }
+    }
 
+</form>
