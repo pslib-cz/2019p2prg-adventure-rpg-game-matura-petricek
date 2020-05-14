@@ -1,4 +1,5 @@
 ﻿using AdventureGame.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,14 +41,8 @@ namespace AdventureGame.Services
         {
             _ss.Save(KEY, State);
         }
-        public void RoomAction(Room room)
+        public bool RoomAction(Room room)
         {
-            if (State.HP <= 0)
-            {
-                State.Location = Room.GameOver;
-            }
-            else
-            {
                 switch (room)
                 {
                     case Room.Pathway:
@@ -69,7 +64,7 @@ namespace AdventureGame.Services
                         State.Level += 1;
                         break;
                     case Room.Bank:
-                        if (State.Money < 0)
+                        if (State.Money <= 0)
                         {
                             State.Money += 5;
                         }
@@ -122,7 +117,11 @@ namespace AdventureGame.Services
                     State.Level = 15;
                 }
                 Store();
+            if (State.HP <= 0)
+            {
+                return true;
             }
+            return false;
         }
     }
 }
