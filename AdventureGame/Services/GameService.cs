@@ -117,9 +117,9 @@ namespace AdventureGame.Services
                 {
                     State.Money = -5;
                 }
-                if (State.Level >= 10)
+                if (State.Level >= 15)
                 {
-                    State.Level = 10;
+                    State.Level = 15;
                 }
                 Store();
             }
