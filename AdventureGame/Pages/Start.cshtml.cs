@@ -14,6 +14,7 @@ namespace AdventureGame
         private GameService _gs;
         public Location Location { get; set; }
         public List<Connection> Targets { get; set; }
+        public GameState State { get; set; }
 
         public StartModel(GameService gs)
         {
@@ -25,6 +26,7 @@ namespace AdventureGame
             _gs.Start();
             Location = _gs.Location;
             Targets = _gs.Targets;
+            State = _gs.State;
         }
     }
 }

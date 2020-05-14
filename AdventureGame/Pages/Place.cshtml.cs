@@ -25,7 +25,6 @@ namespace AdventureGame
         public void OnGet(Room id)
         {
             _gs.FetchData();
-            //
             _gs.RoomAction(id);
             _gs.State.Location = id;
             _gs.Store();

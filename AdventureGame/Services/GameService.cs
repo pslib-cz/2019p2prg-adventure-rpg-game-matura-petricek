@@ -42,48 +42,64 @@ namespace AdventureGame.Services
         }
         public void RoomAction(Room room)
         {
-            if(State.HP <= 0)
+            if (State.HP <= 0)
             {
                 State.Location = Room.GameOver;
-            }
-            if (State.Level == 10)
-            {
-                State.Location = Room.WinRoom;   
             }
             else
             {
                 switch (room)
                 {
-                    case Room.Cave:
-                        State.HP -= 3;
+                    case Room.Pathway:
+                        State.Level += 0.5;
+                        State.Money += 2;
+                        break;
+                    case Room.FakeHome:
                         State.Level += 0.5;
                         break;
+                    case Room.WaspsA:
+                        State.HP -= 2;
+                        State.Level += 0.5;
+                        break;
+                    case Room.WaspsK:
+                        State.HP -= 1;
+                        State.Level += 0.5;
+                        break;
+                    case Room.Hall:
+                        State.Level += 1;
+                        break;
+                    case Room.Bank:
+                        if (State.Money < 0)
+                        {
+                            State.Money += 5;
+                        }
+                        break;
+                    case Room.Cave:
+                        State.Money += 1;
+                        State.Level += 1;
+                        break;
                     case Room.Home:
-                        if(State.HP < 10)
+                        if(State.HP < 8)
                         {
                             State.HP += 2;
                         }
                         break;
-                    case Room.Bank:
-                        if(State.Money < 0)
-                        {
-                            State.Money = 5;
-                        }
-                        break;
                     case Room.GameRoom:
-
-                        //State.Money -= 5;
-                        //State.Level += 0.2;
-                        break;
-                    case Room.Farm:
-                        State.Level += 0.3;
-                        State.Money += 5;
                         break;
                     case Room.Library:
                         State.Money -= 2;
                         State.Level += 2;
                         break;
-                    case Room.Shop:
+                    case Room.Fight:
+                        State.Level += 2;
+                        State.HP -= 5;
+                        break;
+                    case Room.GameOver:
+                        State.Level = 0;
+                        State.HP = 0;
+                        State.Money = 0;
+                        break;
+                    /*case Room.Shop:
                         var rnd = new Random();
                         int random = rnd.Next(Equipment.Count);
                         if (!State.Equipment.Contains(Equipment[random]))
@@ -95,16 +111,18 @@ namespace AdventureGame.Services
                             RoomAction(room);
                         }
                         State.Money -= 20;
-                        break;
+                        break;*/
                 }
                 if(State.Money < -5)
                 {
                     State.Money = -5;
                 }
+                if (State.Level >= 10)
+                {
+                    State.Level = 10;
+                }
                 Store();
             }
-
-
         }
     }
 }

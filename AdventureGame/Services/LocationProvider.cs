@@ -16,25 +16,40 @@ namespace AdventureGame.Services
         {
             _locations = new Dictionary<Room, ILocation>();
             _map = new List<Connection>();
-            _locations.Add(Room.Home, new Location { Title = "Home", Description = "Sweet, sweet home." });
-            _locations.Add(Room.GameRoom, new Location { Title = "Game Room", Description = "Welcome to the casino." });
-            _locations.Add(Room.Start, new Location { Title = "Start", Description = "This is where our story starts." }); // Game starts
-            _locations.Add(Room.GameOver, new Location { Title = "Game Over", Description = "All worldly things will one day perish. You just did." }); // Game Over
-            _locations.Add(Room.Hall, new Location { Title = "Hall", Description = "You stand in seemingly empty hall...This is where you start your journey." });
-            _locations.Add(Room.Library, new Location { Title = "Library", Description = "Library is in utterly desolate state ..." });
+            _locations.Add(Room.Start, new Location { Title = "Old ruined house", Description = "You woke up in an old ruined house. You don't remember anything. " +
+            "Behind some rusty doors you see a hidden pathway." }); // Game starts
+            _locations.Add(Room.Pathway, new Location { Title = "Pathway", Description = "This path was really long, but it looks like it brought me to some hall." });
+            _locations.Add(Room.FakeHome, new Location { Title = "Home", Description = "On your way home you came across some aggressive wasps. What do you do?" });
+            _locations.Add(Room.WaspsA, new Location { Title = "Wasps", Description = "You attacked and so did the wasps." });
+            _locations.Add(Room.WaspsK, new Location { Title = "Wasps", Description = "You were calm...but the wasps were not." });
+            _locations.Add(Room.Hall, new Location { Title = "Hall", Description = "You stand in seemingly empty hall...and then you see a familiar thing...It's a way to your home!" });
             _locations.Add(Room.Bank, new Location { Title = "Bank", Description = "A bank with no interest rate? Seems shady..." });
-            _locations.Add(Room.Cave, new Location { Title = "Cave", Description = "A lot of sounds are coming from this strange cave.\nYou should be carefull." });
-            _map.Add(new Connection(Room.Start, Room.Hall, "Go to hall"));
-            _map.Add(new Connection(Room.Hall, Room.Bank, "Go to bank"));
+            _locations.Add(Room.Cave, new Location { Title = "Cave", Description = "Strange sounds were coming from here." });
+            _locations.Add(Room.Home, new Location { Title = "Home", Description = "Home sweet home." });
+            _locations.Add(Room.GameRoom, new Location { Title = "Game Room", Description = "Welcome to the casino." });
+            _locations.Add(Room.Library, new Location { Title = "Library", Description = "You followed the light and entered the library. You see a strange creature looking at you..." });
+            _locations.Add(Room.Fight, new Location { Title = "Big fight", Description = "You won the fight" });
+            _locations.Add(Room.GameOver, new Location { Title = "Game Over", Description = "You just died...and all the memories with you." }); // Game Over
+            _locations.Add(Room.WinRoom, new Location { Title = "The End", Description = "You Finished the game!" });
+
+            _map.Add(new Connection(Room.Start, Room.Pathway, "Explore the pathway"));
+            _map.Add(new Connection(Room.Start, Room.FakeHome, "Try to go home"));
+            _map.Add(new Connection(Room.Pathway, Room.Hall, "Enter the hall"));
+            _map.Add(new Connection(Room.FakeHome, Room.WaspsA, "Attack them"));
+            _map.Add(new Connection(Room.FakeHome, Room.WaspsK, "Keep calm"));
+            _map.Add(new Connection(Room.WaspsA, Room.Start, "Fall back"));
+            _map.Add(new Connection(Room.WaspsK, Room.Start, "Fall back"));
+            _map.Add(new Connection(Room.Hall, Room.Bank, "Go to the bank"));
             _map.Add(new Connection(Room.Bank, Room.Hall, "Go back to the Hall"));
-            _map.Add(new Connection(Room.Hall, Room.Library, "Visit Library"));
-            _map.Add(new Connection(Room.Library, Room.Hall, "Return to hall"));
-            _map.Add(new Connection(Room.Library, Room.GameOver, "Get eaten by Cthulhu"));
-            _map.Add(new Connection(Room.Start, Room.Cave ,"Go to the dangerous cave"));
-            _map.Add(new Connection(Room.Start, Room.Home, "Go home"));
             _map.Add(new Connection(Room.Hall, Room.Home, "Go home"));
-            _map.Add(new Connection(Room.Home, Room.GameRoom, "Go Gambling"));
             _map.Add(new Connection(Room.Home, Room.Hall, "Go to the hall"));
+            _map.Add(new Connection(Room.Home, Room.GameRoom, "Go Gambling"));
+            _map.Add(new Connection(Room.Hall, Room.Cave, "Go to a cave"));
+            _map.Add(new Connection(Room.Cave, Room.GameOver, "Follow the sounds"));
+            _map.Add(new Connection(Room.Cave, Room.Library, "Follow the light"));
+            _map.Add(new Connection(Room.Library, Room.GameOver, "Shout at it"));
+            _map.Add(new Connection(Room.Library, Room.Fight, "Fight it"));
+            _map.Add(new Connection(Room.Fight, Room.WinRoom, "Continue"));
         }
 
         public bool ExistsLocation(Room id)

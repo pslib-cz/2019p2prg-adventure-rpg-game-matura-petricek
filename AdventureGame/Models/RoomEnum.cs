@@ -11,12 +11,16 @@ namespace AdventureGame.Models
         Hall,
         GameOver,
         Library,
-        Farm,
         Home,
         Cave,
         Shop,
         WinRoom,
         GameRoom,
-        Bank
+        Bank,
+        Pathway,
+        FakeHome,
+        WaspsA,
+        WaspsK,
+        Fight
     }
 }

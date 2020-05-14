@@ -14,10 +14,7 @@ namespace AdventureGame
         [BindProperty]
         public Choice Player { get; set; }
         public Choice Computer { get; set; }
-        [BindProperty]
-        public int Round { get; set; }
-        [BindProperty]
-        public int Wins { get; set; }
+
         private Random Random;
         public RPSModel(GameService gs)
         {
@@ -33,8 +30,6 @@ namespace AdventureGame
         {
             Player = Choice.None;
             Computer = Choice.None;
-            Round = 0;
-            Wins = 0;
             _gs.FetchData();
             State = _gs.State;
         }
