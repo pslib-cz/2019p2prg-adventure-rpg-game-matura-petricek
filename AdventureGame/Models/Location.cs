@@ -9,5 +9,8 @@ namespace AdventureGame.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
+        public int HP { get; set; }
+        public double Level { get; set; }
+        public int Money { get; set; }
     }
 }

@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
 
 namespace AdventureGame.Services
 {
@@ -17,7 +19,6 @@ namespace AdventureGame.Services
         public Location Location { get { return _lp.GetLocation(State.Location); } }
         public List<Connection> Targets { get { return _lp.GetConnectionsFrom(State.Location); } }
         private List<string> Equipment { get; set; }
-
         public GameService(ISessionStorage<GameState> ss, ILocationProvider lp)
         {
             _ss = ss;
@@ -41,87 +42,52 @@ namespace AdventureGame.Services
         {
             _ss.Save(KEY, State);
         }
-        public bool RoomAction(Room room)
+        public void RoomAction(Room room)
         {
-                switch (room)
-                {
-                    case Room.Pathway:
-                        State.Level += 0.5;
-                        State.Money += 2;
-                        break;
-                    case Room.FakeHome:
-                        State.Level += 0.5;
-                        break;
-                    case Room.WaspsA:
-                        State.HP -= 2;
-                        State.Level += 0.5;
-                        break;
-                    case Room.WaspsK:
-                        State.HP -= 1;
-                        State.Level += 0.5;
-                        break;
-                    case Room.Hall:
-                        State.Level += 1;
-                        break;
-                    case Room.Bank:
-                        if (State.Money <= 0)
-                        {
-                            State.Money += 5;
-                        }
-                        break;
-                    case Room.Cave:
-                        State.Money += 1;
-                        State.Level += 1;
-                        break;
-                    case Room.Home:
-                        if(State.HP < 8)
-                        {
-                            State.HP += 2;
-                        }
-                        break;
-                    case Room.GameRoom:
-                        break;
-                    case Room.Library:
-                        State.Money -= 2;
-                        State.Level += 2;
-                        break;
-                    case Room.Fight:
-                        State.Level += 2;
-                        State.HP -= 5;
-                        break;
-                    case Room.GameOver:
-                        State.Level = 0;
-                        State.HP = 0;
-                        State.Money = 0;
-                        break;
-                    /*case Room.Shop:
-                        var rnd = new Random();
-                        int random = rnd.Next(Equipment.Count);
-                        if (!State.Equipment.Contains(Equipment[random]))
-                        {
-                            State.Equipment.Add(Equipment[random]);
-                        }
-                        else
-                        {
-                            RoomAction(room);
-                        }
-                        State.Money -= 20;
-                        break;*/
-                }
-                if(State.Money < -5)
-                {
-                    State.Money = -5;
-                }
-                if (State.Level >= 15)
-                {
-                    State.Level = 15;
-                }
-                Store();
-            if (State.HP <= 0)
+            State.HP += _lp.GetLocation(room).HP;
+            State.Level += _lp.GetLocation(room).Level;
+            State.Money += _lp.GetLocation(room).Money;
+
+            switch (room)
             {
-                return true;
+                case Room.Bank:
+                    if (State.Money <= 0)
+                    {
+                        State.Money += 5;
+                    }
+                    break;
+                case Room.Home:
+                    if (State.HP < 8)
+                    {
+                        State.HP += 2;
+                    }
+                    break;
+                case Room.GameOver:
+                    State.HP = 0;
+                    break;
+                /*case Room.Shop:
+                var rnd = new Random();
+                int random = rnd.Next(Equipment.Count);
+                if (!State.Equipment.Contains(Equipment[random]))
+                {
+                    State.Equipment.Add(Equipment[random]);
+                }
+                else
+                {
+                    RoomAction(room);
+                }
+                State.Money -= 20;
+                break;*/
             }
-            return false;
+            if (State.Money < -5)
+            {
+                State.Money = -5;
+            }
+            if (State.Level >= 15)
+            {
+                State.Level = 15;
+            }
+            Store();
         }
     }
 }

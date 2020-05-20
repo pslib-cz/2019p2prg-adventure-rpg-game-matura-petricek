@@ -18,17 +18,17 @@ namespace AdventureGame.Services
             _map = new List<Connection>();
             _locations.Add(Room.Start, new Location { Title = "Old ruined house", Description = "You woke up in an old ruined house. You don't remember anything. " +
             "Behind some rusty doors you see a hidden pathway." }); // Game starts
-            _locations.Add(Room.Pathway, new Location { Title = "Pathway", Description = "This path was really long, but it looks like it brought me to some hall." });
-            _locations.Add(Room.FakeHome, new Location { Title = "Home", Description = "On your way home you came across some aggressive wasps. What do you do?" });
-            _locations.Add(Room.WaspsA, new Location { Title = "Wasps", Description = "You attacked and so did the wasps." });
-            _locations.Add(Room.WaspsK, new Location { Title = "Wasps", Description = "You were calm...but the wasps were not." });
-            _locations.Add(Room.Hall, new Location { Title = "Hall", Description = "You stand in seemingly empty hall...and then you see a familiar thing...It's a way to your home!" });
+            _locations.Add(Room.Pathway, new Location { Title = "Pathway", Level = 0.5, Money = 2,Description = "This path was really long, but it looks like it brought me to some hall." });
+            _locations.Add(Room.FakeHome, new Location { Title = "Home", Level = 0.5, Description = "On your way home you came across some aggressive wasps. What do you do?" });
+            _locations.Add(Room.WaspsA, new Location { Title = "Wasps", HP = -2, Level = 0.5, Description = "You attacked and so did the wasps." });
+            _locations.Add(Room.WaspsK, new Location { Title = "Wasps", HP = -1, Level = 0.5, Description = "You were calm...but the wasps were not." });
+            _locations.Add(Room.Hall, new Location { Title = "Hall", Level = 1, Description = "You stand in seemingly empty hall...and then you see a familiar thing...It's a way to your home!" });
             _locations.Add(Room.Bank, new Location { Title = "Bank", Description = "A bank with no interest rate? Seems shady..." });
-            _locations.Add(Room.Cave, new Location { Title = "Cave", Description = "Strange sounds were coming from here." });
+            _locations.Add(Room.Cave, new Location { Title = "Cave", Level = 1, Money = 1, Description = "Strange sounds were coming from here." });
             _locations.Add(Room.Home, new Location { Title = "Home", Description = "Home sweet home." });
             _locations.Add(Room.GameRoom, new Location { Title = "Game Room", Description = "Welcome to the casino." });
-            _locations.Add(Room.Library, new Location { Title = "Library", Description = "You followed the light and entered the library. You see a strange creature looking at you..." });
-            _locations.Add(Room.Fight, new Location { Title = "Big fight", Description = "You won the fight" });
+            _locations.Add(Room.Library, new Location { Title = "Library", Level = 2, Money = -2, Description = "You followed the light and entered the library. You see a strange creature looking at you..." });
+            _locations.Add(Room.Fight, new Location { Title = "Big fight", HP = -5, Level = 2 });
             _locations.Add(Room.GameOver, new Location { Title = "Game Over", Description = "You just died...and all the memories with you." }); // Game Over
             _locations.Add(Room.WinRoom, new Location { Title = "The End", Description = "You Finished the game!" });
 

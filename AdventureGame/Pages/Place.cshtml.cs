@@ -25,11 +25,7 @@ namespace AdventureGame
         public void OnGet(Room id)
         {
             _gs.FetchData();
-            if(_gs.RoomAction(id))
-            {
-                Redirect("/Place?id=GameOver");
-                //RedirectToPage("Place", new { id = Room.GameOver });
-            }
+            _gs.RoomAction(id);
             _gs.State.Location = id;
             _gs.Store();
             Location = _gs.Location;

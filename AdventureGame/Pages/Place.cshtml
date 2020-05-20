@@ -9,6 +9,10 @@
 <div class="m-1">
     @foreach (var target in Model.Targets)
     {
+        if (Model.State.HP <= 0)
+        {
+            target.To = Models.Room.GameOver;
+        }
         if (target.To == Models.Room.GameRoom)
         {
             <a class="btn btn-secondary" asp-page="RPS">@target.Description</a>

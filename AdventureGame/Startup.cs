@@ -26,13 +26,13 @@ namespace AdventureGame
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddTransient<ISessionStorage<GameState>, SessionStorage<GameState>>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<ISessionStorage<GameState>, SessionStorage<GameState>>();
             services.AddScoped<ILocationProvider, LocationProvider>();
             services.AddScoped<GameService>();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
