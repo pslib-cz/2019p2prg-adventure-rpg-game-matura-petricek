@@ -19,8 +19,10 @@ namespace AdventureGame.Services
         public Location Location { get { return _lp.GetLocation(State.Location); } }
         public List<Connection> Targets { get { return _lp.GetConnectionsFrom(State.Location); } }
         private List<string> Equipment { get; set; }
-        public GameService(ISessionStorage<GameState> ss, ILocationProvider lp)
+        private readonly Random random = new Random();
+        public GameService(ISessionStorage<GameState> ss, ILocationProvider lp, Random random)
         {
+            this.random = random;
             _ss = ss;
             _lp = lp;
             State = new GameState();
@@ -29,7 +31,7 @@ namespace AdventureGame.Services
 
         public void Start()
         {
-            State = new GameState { MaxHp = 10, Location = START_ROOM, HP = 10, Level = 1, Money = 0};
+            State = new GameState { MaxHp = 10, Location = START_ROOM, HP = 10, Level = 1, Money = 5, Equipment= 0,};
             Store();
         }
 
@@ -66,18 +68,16 @@ namespace AdventureGame.Services
                     State.HP = 0;
                     break;
                 /*case Room.Shop:
-                var rnd = new Random();
-                int random = rnd.Next(Equipment.Count);
-                if (!State.Equipment.Contains(Equipment[random]))
-                {
-                    State.Equipment.Add(Equipment[random]);
-                }
-                else
-                {
-                    RoomAction(room);
-                }
-                State.Money -= 20;
-                break;*/
+                    int item = random.Next(Equipment.Count);
+                    if (!State.Equipment.Contains(Equipment[item]))
+                    {
+                        State.Equipment.Add(Equipment[item]);
+                    }
+                    else
+                    {
+                        RoomAction(room);
+                    }
+                    break;*/
             }
             if (State.Money < -5)
             {

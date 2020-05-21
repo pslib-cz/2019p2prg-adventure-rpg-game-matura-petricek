@@ -11,8 +11,8 @@ namespace AdventureGame.Models
         public int HP { get; set; }
         public Room Location { get; set; }
         public int Money { get; set; }
-        public List<string> Equipment { get; set; }
+        public int Equipment { get; set; }
         public double Level { get; set; }
-
+        
     }
 }

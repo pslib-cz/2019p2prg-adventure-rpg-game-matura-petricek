@@ -32,6 +32,7 @@ namespace AdventureGame
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ILocationProvider, LocationProvider>();
             services.AddScoped<GameService>();
+            services.AddSingleton<Random>();
             services.AddRazorPages();
         }
 

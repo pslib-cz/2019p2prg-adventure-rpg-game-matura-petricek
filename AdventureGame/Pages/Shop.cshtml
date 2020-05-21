@@ -1,0 +1,33 @@
+﻿@page
+@model AdventureGame.Pages.ShopModel
+@{
+    ViewData["Title"] = "Shop";
+}
+
+<h1>Shop</h1>
+<p>Welcome to the shop dsfsdfsdfsdf</p>
+<form method="post">
+    <div class="form-check">
+        <input class="form-check-input" type="radio">
+        <label class="form-check-label">
+            Sword
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio">
+        <label class="form-check-label">
+            Axe
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio">
+        <label class="form-check-label">
+            Armor
+        </label>
+    </div>
+    <button style="margin:5px" type="submit" class="btn btn-primary">Buy</button>
+
+</form>
+<a style="margin:5px" class="btn btn-secondary" asp-page="Place" asp-route-id="Hall">Go back to hall</a>
+
+
