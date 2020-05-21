@@ -15,10 +15,10 @@ namespace AdventureGame
         public Choice Player { get; set; }
         public Choice Computer { get; set; }
 
-        private Random Random;
-        public RPSModel(GameService gs)
+        private readonly Random random = new Random();
+        public RPSModel(GameService gs, Random random)
         {
-            Random = new Random();
+            this.random = random;
             _gs = gs;
         }
         private GameService _gs;
@@ -36,7 +36,7 @@ namespace AdventureGame
         public void OnPost()
         {
             _gs.FetchData();
-            Computer = (Choice)Random.Next(1, 4);
+            Computer = (Choice)random.Next(1, 4);
             if (Player == Choice.Rock && Computer == Choice.Scissors ||
                 Player == Choice.Scissors && Computer == Choice.Paper ||
                 Player == Choice.Paper && Computer == Choice.Rock)

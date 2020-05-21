@@ -13,6 +13,6 @@ namespace AdventureGame.Models
         public int Money { get; set; }
         public int Equipment { get; set; }
         public double Level { get; set; }
-        
+
     }
 }

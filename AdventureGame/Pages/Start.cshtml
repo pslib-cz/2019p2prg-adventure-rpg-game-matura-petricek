@@ -18,14 +18,8 @@
 <div style="padding-left:72%">
     <a style="color:red">HP: @Model.State.HP</a>
     <a style="color:deepskyblue">Level: @Model.State.Level</a>
-    @if (Model.State.Equipment != null)
-    {
-        @foreach (var x in Model.State.Equipment)
-        {
-            <a>@x</a>
-        }
-    }
     <a style="color:gold">Gold: @Model.State.Money</a>
+    <a style="color:gray">Equipment: @Model.State.Equipment</a>
 </div>
 
 

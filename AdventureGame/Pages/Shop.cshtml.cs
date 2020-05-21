@@ -14,6 +14,7 @@ namespace AdventureGame.Pages
         private GameService _gs;
         [BindProperty]
         public GameState State { get; set; }
+
         public ShopModel(GameService gs)
         {
             _gs = gs;
@@ -23,15 +24,17 @@ namespace AdventureGame.Pages
         public void OnGet()
         {
             _gs.FetchData();
+            _gs.Store();
             State = _gs.State;
-
         }
         public void OnPost()
         {
             _gs.FetchData();
             _gs.State.Money -= 2;
             _gs.State.Equipment += 1;
+            _gs.State.HP += 1;
             _gs.Store();
+            State = _gs.State;
         }
     }
 }

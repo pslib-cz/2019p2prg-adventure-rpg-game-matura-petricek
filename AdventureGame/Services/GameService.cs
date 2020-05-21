@@ -18,20 +18,16 @@ namespace AdventureGame.Services
         public GameState State { get; private set; }
         public Location Location { get { return _lp.GetLocation(State.Location); } }
         public List<Connection> Targets { get { return _lp.GetConnectionsFrom(State.Location); } }
-        private List<string> Equipment { get; set; }
-        private readonly Random random = new Random();
-        public GameService(ISessionStorage<GameState> ss, ILocationProvider lp, Random random)
+        public GameService(ISessionStorage<GameState> ss, ILocationProvider lp)
         {
-            this.random = random;
             _ss = ss;
             _lp = lp;
             State = new GameState();
-            Equipment = new List<string> { "boots", "leggings", "helmet" };
         }
 
         public void Start()
         {
-            State = new GameState { MaxHp = 10, Location = START_ROOM, HP = 10, Level = 1, Money = 5, Equipment= 0,};
+            State = new GameState { MaxHp = 10, Location = START_ROOM, HP = 10, Level = 1, Money = 5, Equipment = 0 };
             Store();
         }
 
@@ -67,17 +63,6 @@ namespace AdventureGame.Services
                 case Room.GameOver:
                     State.HP = 0;
                     break;
-                /*case Room.Shop:
-                    int item = random.Next(Equipment.Count);
-                    if (!State.Equipment.Contains(Equipment[item]))
-                    {
-                        State.Equipment.Add(Equipment[item]);
-                    }
-                    else
-                    {
-                        RoomAction(room);
-                    }
-                    break;*/
             }
             if (State.Money < -5)
             {

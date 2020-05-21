@@ -10,22 +10,29 @@
     <div class="form-check">
         <input class="form-check-input" type="radio">
         <label class="form-check-label">
-            Sword
+            Helmet
         </label>
     </div>
     <div class="form-check">
         <input class="form-check-input" type="radio">
         <label class="form-check-label">
-            Axe
+            Shoes
         </label>
     </div>
     <div class="form-check">
         <input class="form-check-input" type="radio">
         <label class="form-check-label">
-            Armor
+            Chestplate
         </label>
     </div>
-    <button style="margin:5px" type="submit" class="btn btn-primary">Buy</button>
+    @if (Model.State.Money < 2)
+    {
+        <p>You don't have enough money to buy new equipment</p>
+    }
+    else
+    {
+        <button style="margin:5px" type="submit" class="btn btn-primary">Buy</button>
+    }
 
 </form>
 <a style="margin:5px" class="btn btn-secondary" asp-page="Place" asp-route-id="Hall">Go back to hall</a>

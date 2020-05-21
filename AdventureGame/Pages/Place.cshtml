@@ -17,7 +17,7 @@
         {
             <a class="btn btn-secondary" asp-page="RPS">@target.Description</a>
         }
-        if (target.To == Models.Room.Shop)
+        else if (target.To == Models.Room.Shop)
         {
             <a class="btn btn-secondary" asp-page="Shop">@target.Description</a>
         }
