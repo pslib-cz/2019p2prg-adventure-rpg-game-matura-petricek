@@ -13,6 +13,7 @@ namespace AdventureGame.Models
         Library,
         Home,
         Cave,
+        CaveL,
         Shop,
         WinRoom,
         GameRoom,
@@ -21,6 +22,10 @@ namespace AdventureGame.Models
         FakeHome,
         WaspsA,
         WaspsK,
-        Fight
+        Fight,
+        Footprints,
+        Footprints2,
+        GoblinA,
+        GoblinN
     }
 }

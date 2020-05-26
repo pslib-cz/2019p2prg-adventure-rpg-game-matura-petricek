@@ -30,10 +30,17 @@ namespace AdventureGame.Pages
         public void OnPost()
         {
             _gs.FetchData();
-            _gs.State.Money -= 2;
-            _gs.State.Equipment += 1;
-            _gs.State.HP += 1;
-            _gs.Store();
+            if (_gs.State.HP >= _gs.State.MaxHp)
+            {
+                _gs.State.HP = _gs.State.MaxHp;
+            }
+            else
+            {
+                _gs.State.Money -= 2;
+                _gs.State.Equipment += 1;
+                _gs.State.HP += 1;
+                _gs.Store();
+            }
             State = _gs.State;
         }
     }

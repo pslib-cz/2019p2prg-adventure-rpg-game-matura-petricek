@@ -21,12 +21,20 @@
         {
             <a class="btn btn-secondary" asp-page="Shop">@target.Description</a>
         }
+        else if (target.To == Models.Room.Cave && Model.State.HasAKey == false)
+        {
+            <a class="btn btn-secondary" asp-page="Place" asp-route-id="CaveL">Go to a cave</a>
+        }
+        else if (target.To == Models.Room.Footprints && Model.State.HasAKey == true)
+        {
+            <a class="btn btn-secondary" asp-page="Place" asp-route-id="Footprints2">Go to the dark forest</a>
+        }
         else
         {
             <a class="btn btn-secondary" asp-page="Place" asp-route-id="@target.To">@target.Description</a>
         }
     }
-    <div class="avatar" style="padding-left:70%">
+    <div style="padding-left:70%">
         <img style="width: 75%;" class="img" src="~/img/avatar.png" alt="avatar">
     </div>
     <div style="padding-left:72%">

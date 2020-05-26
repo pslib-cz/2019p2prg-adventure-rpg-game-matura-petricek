@@ -27,7 +27,7 @@ namespace AdventureGame.Services
 
         public void Start()
         {
-            State = new GameState { MaxHp = 10, Location = START_ROOM, HP = 10, Level = 1, Money = 5, Equipment = 0 };
+            State = new GameState { MaxHp = 20, Location = START_ROOM, HP = 10, Level = 1, Money = 5, Equipment = 0, HasALoan = false };
             Store();
         }
 
@@ -49,10 +49,12 @@ namespace AdventureGame.Services
             switch (room)
             {
                 case Room.Bank:
-                    if (State.Money <= 0)
+                    if (State.Money <= 0 && State.HasALoan == false)
                     {
                         State.Money += 5;
+                        State.HasALoan = true;
                     }
+                    if (State.HasALoan == true) _lp.GetLocation(room).Description = "You already took money from the bank!";
                     break;
                 case Room.Home:
                     if (State.HP < 8)
@@ -63,6 +65,13 @@ namespace AdventureGame.Services
                 case Room.GameOver:
                     State.HP = 0;
                     break;
+                case Room.Footprints:
+                    State.HasAKey = true;
+                    break;
+            }
+            if (State.HP >= State.MaxHp)
+            {
+                State.HP = State.MaxHp;
             }
             if (State.Money < -5)
             {

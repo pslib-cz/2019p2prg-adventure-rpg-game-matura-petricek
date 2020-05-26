@@ -25,16 +25,28 @@
             Chestplate
         </label>
     </div>
-    @if (Model.State.Money < 2)
+    @if (Model.State.HP >= Model.State.MaxHp)
+    {
+        <p>You cannot buy equipment when your health is full</p>
+        <a class="btn btn-secondary" asp-page="Place" asp-route-id="Home">Go home</a>
+    }
+    else if (Model.State.Money < 2)
     {
         <p>You don't have enough money to buy new equipment</p>
+        <a class="btn btn-secondary" asp-page="Place" asp-route-id="Home">Go home</a>
     }
     else
     {
         <button style="margin:5px" type="submit" class="btn btn-primary">Buy</button>
+        <a class="btn btn-secondary" asp-page="Place" asp-route-id="Home">Go home</a>
     }
-
 </form>
-<a style="margin:5px" class="btn btn-secondary" asp-page="Place" asp-route-id="Hall">Go back to hall</a>
-
-
+<div class="avatar" style="padding-left:70%">
+    <img style="width: 75%;" class="img" src="~/img/avatar.png" alt="avatar">
+</div>
+<div style="padding-left:72%">
+    <a style="color:red">HP: @Model.State.HP</a>
+    <a style="color:deepskyblue">Level: @Model.State.Level</a>
+    <a style="color:gold">Gold: @Model.State.Money</a>
+    <a style="color:gray">Equipment: @Model.State.Equipment</a>
+</div>

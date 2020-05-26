@@ -31,6 +31,7 @@ namespace AdventureGame
             Player = Choice.None;
             Computer = Choice.None;
             _gs.FetchData();
+            _gs.Store();
             State = _gs.State;
         }
         public void OnPost()
@@ -55,7 +56,7 @@ namespace AdventureGame
                 _gs.State.Money -= 5;
             }
             _gs.Store();
-            
+            State = _gs.State;
             Finished = true;
         }
     }
