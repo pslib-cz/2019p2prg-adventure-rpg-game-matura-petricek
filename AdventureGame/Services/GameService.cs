@@ -27,7 +27,7 @@ namespace AdventureGame.Services
 
         public void Start()
         {
-            State = new GameState { MaxHp = 20, Location = START_ROOM, HP = 10, Level = 1, Money = 5, Equipment = 0, HasALoan = false };
+            State = new GameState { MaxHp = 20, Location = START_ROOM, HP = 10, Level = 1, Money = 5, Equipment = 0, HasALoan = false, HasAKey = false };
             Store();
         }
 
